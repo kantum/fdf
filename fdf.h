@@ -7,6 +7,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <unistd.h>
 # include "mlx.h"
 
 typedef struct s_params	t_params;
