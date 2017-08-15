@@ -1,40 +1,77 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include "mlx.h"
 
-void	test_func(int *mlx, int *win, int x_from, int y_from, int x_to, int y_to)
-{
-	int		x;
-	int		y;
+typedef struct s_params	t_params;
 
-	x = x_from;
-	y = y_from;
-	while (y < y_to)
+struct					s_params
+{
+	void		*mlx;
+	void		*win;
+	int			x;
+	int			y;
+	int			x1;
+	int			y1;
+	int			color;
+};
+
+void	rectangle(t_params *param)
+{
+	int	x;
+	int	y;
+	
+	y = param->y;
+	while (y < param->y1)
 	{
-		while (x < x_to)
+		x = param->x;
+		while (x < param->x1)
 		{
-			mlx_pixel_put(mlx, win, x, y, 0x00FFFFFF);
+			mlx_pixel_put(param->mlx, param->win, x, y, param->color);
 			x++;
 		}
 		y++;
 	}
 }
 
-int		my_func(int keycode, void *param)
+int		my_func(int keycode, t_params *param)
 {
+	if (keycode == 123)
+		rectangle(param);
+	else if (keycode == 124)
+		mlx_clear_window(param->mlx, param->win);
 	printf("key event %d\n", keycode);
-	(void)param;
 	return (0);
 }
 
 int		main()
 {
-	void	*mlx;
-	void 	*win;
+	t_params	*params;
+	void		*mlx;
+	void 		*win;
+	int			x;
+	int			y;
+	int			x1;
+	int			y1;
+	int			color;
 
+	x = 50;
+	y = 50;
+	x1 = 200;
+	y1 = 200;
+	color = 0xFFFF00;
 
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 800, 600, "win");
-	mlx_key_hook(win, my_func, 0);
-	//test_func(100, 200, 200, 400);
+
+	params = (t_params*)malloc(sizeof(t_params));
+
+	params->mlx = mlx;
+	params->win = win;
+	params->x = x;
+	params->y = y;
+	params->x1 = x1;
+	params->y1 = y1;
+	params->color = color;
+	mlx_key_hook(win, my_func, params);
 	mlx_loop(mlx);
 }
