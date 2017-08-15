@@ -18,11 +18,14 @@ void	test_func(int *mlx, int *win, int x_from, int y_from, int x_to, int y_to)
 		y++;
 	}
 }
+
 int		my_func(int keycode, void *param)
 {
 	printf("key event %d\n", keycode);
+	(void)param;
 	return (0);
 }
+
 int		main()
 {
 	void	*mlx;
