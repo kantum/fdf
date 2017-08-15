@@ -8,9 +8,13 @@ LFLAGS = -Llibft -lft -Lminilibx_macos_sierra -lmlx
 
 FRAMEWORK = -framework OpenGl -framework AppKit
 
+SRCS = srcs/
+
 SRC = main.c
 
-HEADERS = libft/includes fdf.h
+HEADERS = includes
+
+LHEADERS = libft/includes
 
 LIB = lib
 
@@ -25,11 +29,12 @@ $(LIB):
 	make -C libft
 	make -C minilibx_macos_sierra
 
-$(OBJ):
-	gcc $(FLAGS) -c $(SRC) -I $(HEADERS) -I minilibx_macos_sierra
+$(OBJ):$(SRCS)$(SRC)
+	gcc $(FLAGS) -c $(SRCS)$(SRC) -I $(HEADERS) -I minilibx_macos_sierra
 
 clean:
 	@rm -rf $(OBJ)
+	@rm -f *.gch
 	@make -C libft clean
 	@make -C minilibx_macos_sierra clean
 

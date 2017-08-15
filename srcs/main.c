@@ -84,11 +84,11 @@ int		main()
 	int			y1;
 	int			color;
 
-	x = 100;
+	x = 400;
 	y = 300;
 	x1 = 200;
-	y1 = 400;
-	color = 0xffefd5;
+	y1 = 600;
+	color = 0x0f00d5;
 
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 800, 600, "win");
