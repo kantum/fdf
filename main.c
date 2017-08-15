@@ -1,19 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include "mlx.h"
-
-typedef struct s_params	t_params;
-
-struct					s_params
-{
-	void		*mlx;
-	void		*win;
-	int			x;
-	int			y;
-	int			x1;
-	int			y1;
-	int			color;
-};
+#include "fdf.h"
 
 void	rectangle(t_params *param)
 {
@@ -58,7 +43,7 @@ int		main()
 	y = 50;
 	x1 = 200;
 	y1 = 200;
-	color = 0xFFFF00;
+	color = 0xffefd5;
 
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 800, 600, "win");

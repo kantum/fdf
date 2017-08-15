@@ -10,7 +10,7 @@ FRAMEWORK = -framework OpenGl -framework AppKit
 
 SRC = main.c
 
-HEADERS = libft/includes
+HEADERS = libft/includes fdf.h
 
 LIB = lib
 
