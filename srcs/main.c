@@ -1,64 +1,5 @@
 #include "fdf.h"
 
-void	rectangle(t_params *param)
-{
-	int	x;
-	int	y;
-	
-	y = param->y;
-	while (y < param->y1)
-	{
-		x = param->x;
-		while (x < param->x1)
-		{
-			mlx_pixel_put(param->mlx, param->win, x, y, param->color);
-			x++;
-		}
-		y++;
-	}
-}
-
-void	triangle_right(t_params *param)
-{
-	int	x;
-	int	y;
-	int x1;
-
-	y = param->y;
-	x1 = param->x1;
-	while (y < param->y1)
-	{
-		x = x1--;
-		while (x < param->x1)
-		{
-			mlx_pixel_put(param->mlx, param->win, x, y, param->color);
-			x++;
-		}
-		y++;
-	}
-}
-
-void	triangle_left(t_params *param)
-{
-	int	x;
-	int	y;
-	int	x1;
-
-	y = param->y;
-	x1 = param->x;
-	while (y < param->y1)
-	{
-		x1++;
-		x = param->x;
-		while (x < x1)
-		{
-			mlx_pixel_put(param->mlx, param->win, x, y, param->color);
-			x++;
-		}
-		y++;
-	}
-}
-
 int		my_func(int keycode, t_params *param)
 {
 	if (keycode == 123)
@@ -84,11 +25,11 @@ int		main()
 	int			y1;
 	int			color;
 
-	x = 400;
-	y = 300;
-	x1 = 200;
-	y1 = 600;
-	color = 0x0f00d5;
+	x = 100;
+	y = 200;
+	x1 = 300;
+	y1 = 400;
+	color = 0xFFF0FF;
 
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 800, 600, "win");

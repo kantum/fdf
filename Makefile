@@ -2,45 +2,60 @@ NAME = fdf
 
 CC = clang
 
-FLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=address
 
-LFLAGS = -Llibft -lft -Lminilibx_macos_sierra -lmlx
+LFLAGS = -Llibft -lft -L$(MINILIB) -lmlx
 
-FRAMEWORK = -framework OpenGl -framework AppKit
-
-SRCS = srcs/
-
-SRC = main.c
-
-HEADERS = includes
-
-LHEADERS = libft/includes
+DIR = srcs
 
 LIB = lib
 
-OBJ = $(SRC:.c=.o)
+SRCS = main.c draw.c
+
+SRC = $(addprefix $(DIR)/,$(SRCS))
+
+OBJ = $(SRCS:.c=.o)
+
+HEADERS = includes
 
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) $(LFLAGS) -o $(NAME) $(FRAMEWORK)
+	@$(CC) $(CFLAGS) $(OBJ) $(LFLAGS) -o $(NAME) $(FRAMEWORK)
 
-$(LIB):
-	make -C libft
-	make -C minilibx_macos_sierra
+$(LIB): $(MINILIB)
+	@make -C libft
+	@make -C $(MINILIB)
 
-$(OBJ):$(SRCS)$(SRC)
-	gcc $(FLAGS) -c $(SRCS)$(SRC) -I $(HEADERS) -I minilibx_macos_sierra
+$(OBJ): $(SRC)
+	@$(CC) $(CFLAGS) -c $(SRC) -I $(HEADERS) -I $(MINILIB)
+
+MINILIB: $(UNAME_S)
+
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	MINILIB = minilibx
+endif
+ifeq ($(UNAME_S),Darwin)
+	FRAMEWORK = -framework OpenGl -framework AppKit
+	UNAME_R := $(shell uname -r)
+	ifneq ($(filter 15%, $(UNAME_R)),)
+		MINILIB = minilibx_macos_el_capitan
+	endif
+	ifneq ($(filter 16%, $(UNAME_R)),)
+		MINILIB = minilibx_macos_sierra
+	endif
+endif
 
 clean:
 	@rm -rf $(OBJ)
 	@rm -f *.gch
 	@make -C libft clean
-	@make -C minilibx_macos_sierra clean
+	@make -C $(MINILIB) clean
 
 fclean: clean
 	@rm -f $(NAME)
 	@make -C libft fclean
-	@make -C minilibx_macos_sierra clean
+	@make -C $(MINILIB) clean
 
 re: fclean all

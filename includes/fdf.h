@@ -22,7 +22,10 @@ struct					s_params
 	int			color;
 };
 
-void	rectangle(t_params *param);
-int		my_func(int keycode, t_params *param);
+int						my_func(int keycode, t_params *param);
+void					rectangle(t_params *param);
+void					triangle_left(t_params *param);
+void					triangle_right(t_params *param);
+void					rectangle(t_params *param);
 
 #endif
