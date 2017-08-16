@@ -22,6 +22,7 @@ struct					s_params
 	int			color;
 };
 
+void					quit(t_params *param);
 int						my_func(int keycode, t_params *param);
 void					rectangle(t_params *param);
 void					triangle_left(t_params *param);

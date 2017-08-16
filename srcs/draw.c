@@ -1,5 +1,11 @@
 #include "fdf.h"
 
+void	quit(t_params *param)
+{
+	mlx_destroy_window (param->mlx, param->win);
+	exit (0);
+}
+
 void	rectangle(t_params *param)
 {
 	int	x;

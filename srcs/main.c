@@ -2,6 +2,8 @@
 
 int		my_func(int keycode, t_params *param)
 {
+	if (keycode == 53)
+		quit(param);
 	if (keycode == 123)
 		rectangle(param);
 	else if (keycode == 124)
