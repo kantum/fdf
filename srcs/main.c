@@ -5,14 +5,17 @@ int		my_func(int keycode, t_params *param)
 	if (keycode == 53)
 		quit(param);
 	if (keycode == 123)
-		rectangle(param);
+	{
+		trace(param);
+		red_point(param);
+	}
 	else if (keycode == 124)
 		mlx_clear_window(param->mlx, param->win);
 	else if (keycode == 126)
 		triangle_right(param);
 	else if (keycode == 125)
 		triangle_left(param);
-	printf("key event %d\n", keycode);
+	//printf("key event %d\n", keycode);
 	return (0);
 }
 
@@ -28,9 +31,9 @@ int		main()
 	int			color;
 
 	x = 100;
-	y = 200;
-	x1 = 300;
-	y1 = 400;
+	y = 400;
+	x1 = 500;
+	y1 = 300;
 	color = 0xFFF0FF;
 
 	mlx = mlx_init();

@@ -9,6 +9,8 @@
 # include <stdio.h>
 # include <unistd.h>
 # include "mlx.h"
+# include "libft.h"
+# include <math.h>
 
 typedef struct s_params	t_params;
 struct					s_params
@@ -28,5 +30,7 @@ void					rectangle(t_params *param);
 void					triangle_left(t_params *param);
 void					triangle_right(t_params *param);
 void					rectangle(t_params *param);
+void					trace(t_params *param);
+void					red_point(t_params *param);
 
 #endif
