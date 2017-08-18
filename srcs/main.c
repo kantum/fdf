@@ -1,29 +1,43 @@
 #include "fdf.h"
 
-int		my_func(int keycode, t_params *param)
+int		key_hook(int keycode, t_env *e)
 {
 	if (keycode == 53)
-		quit(param);
+		quit(e);
 	if (keycode == 123)
 	{
-		trace(param);
-		red_point(param);
+		trace(e);
+		red_point(e);
 	}
 	else if (keycode == 124)
-		mlx_clear_window(param->mlx, param->win);
+		mlx_clear_window(e->mlx, e->win);
 	else if (keycode == 126)
-		triangle_right(param);
+		triangle_right(e);
 	else if (keycode == 125)
-		triangle_left(param);
+		triangle_left(e);
 	//printf("key event %d\n", keycode);
 	return (0);
 }
 
+int		mouse_hook(int button, int x, int y, t_env *e)
+{
+	printf("mouse : %d (%d:%d)\n", button, x, y);
+	if (button == 1)
+	{
+		e->x1 = x;
+		e->y1 = y;
+		trace(e);
+	}
+	return (0);
+}
+int		expose_hook(t_env *e)
+{
+		return (mlx_clear_window(e->mlx, e->win));
+}
+
 int		main()
 {
-	t_params	*params;
-	void		*mlx;
-	void 		*win;
+	t_env		*e;
 	int			x;
 	int			y;
 	int			x1;
@@ -36,18 +50,17 @@ int		main()
 	y1 = 300;
 	color = 0xFFF0FF;
 
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 800, 600, "win");
+	e = (t_env*)malloc(sizeof(t_env));
 
-	params = (t_params*)malloc(sizeof(t_params));
-
-	params->mlx = mlx;
-	params->win = win;
-	params->x = x;
-	params->y = y;
-	params->x1 = x1;
-	params->y1 = y1;
-	params->color = color;
-	mlx_key_hook(win, my_func, params);
-	mlx_loop(mlx);
+	e->mlx = mlx_init();
+	e->win = mlx_new_window(e->mlx, 800, 600, "win");
+	e->x = x;
+	e->y = y;
+	e->x1 = x1;
+	e->y1 = y1;
+	e->color = color;
+	mlx_key_hook(e->win, key_hook, e);
+	mlx_mouse_hook(e->win, mouse_hook, e);
+	mlx_expose_hook(e->win, expose_hook, e);
+	mlx_loop(e->mlx);
 }

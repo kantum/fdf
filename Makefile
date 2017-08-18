@@ -21,7 +21,7 @@ HEADERS = includes
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(LFLAGS) -o $(NAME) $(FRAMEWORK)
+	@$(CC) $(CFLAGS) $(OBJ) $(LFLAGS) -o $(NAME) $(ADDS)
 
 $(LIB): $(MINILIB)
 	@make -C libft
@@ -35,9 +35,10 @@ MINILIB: $(UNAME_S)
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	MINILIB = minilibx
+	ADDS = -L/usr/X11/lib -lXext -lx11
 endif
 ifeq ($(UNAME_S),Darwin)
-	FRAMEWORK = -framework OpenGl -framework AppKit
+	ADDS = -framework OpenGl -framework AppKit
 	UNAME_R := $(shell uname -r)
 	ifneq ($(filter 15%, $(UNAME_R)),)
 		MINILIB = minilibx_macos_el_capitan

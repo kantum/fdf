@@ -12,8 +12,8 @@
 # include "libft.h"
 # include <math.h>
 
-typedef struct s_params	t_params;
-struct					s_params
+typedef struct s_env	t_env;
+struct					s_env
 {
 	void		*mlx;
 	void		*win;
@@ -24,13 +24,13 @@ struct					s_params
 	int			color;
 };
 
-void					quit(t_params *param);
-int						my_func(int keycode, t_params *param);
-void					rectangle(t_params *param);
-void					triangle_left(t_params *param);
-void					triangle_right(t_params *param);
-void					rectangle(t_params *param);
-void					trace(t_params *param);
-void					red_point(t_params *param);
+void					quit(t_env *e);
+int						my_func(int keycode, t_env *e);
+void					rectangle(t_env *e);
+void					triangle_left(t_env *e);
+void					triangle_right(t_env *e);
+void					rectangle(t_env *e);
+void					trace(t_env *e);
+void					red_point(t_env *e);
 
 #endif

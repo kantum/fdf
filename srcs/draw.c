@@ -1,86 +1,86 @@
 #include "fdf.h"
 
-void	quit(t_params *param)
+void	quit(t_env *e)
 {
-	mlx_destroy_window (param->mlx, param->win);
+	mlx_destroy_window (e->mlx, e->win);
 	exit (0);
 }
 
-void	rectangle(t_params *param)
+void	rectangle(t_env *e)
 {
 	int	x;
 	int	y;
 	
-	y = param->y;
-	while (y < param->y1)
+	y = e->y;
+	while (y < e->y1)
 	{
-		x = param->x;
-		while (x < param->x1)
+		x = e->x;
+		while (x < e->x1)
 		{
-			mlx_pixel_put(param->mlx, param->win, x, y, param->color);
+			mlx_pixel_put(e->mlx, e->win, x, y, e->color);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	triangle_right(t_params *param)
+void	triangle_right(t_env *e)
 {
 	int	x;
 	int	y;
 	int x1;
 
-	y = param->y;
-	x1 = param->x1;
-	while (y < param->y1)
+	y = e->y;
+	x1 = e->x1;
+	while (y < e->y1)
 	{
 		x = x1--;
-		while (x < param->x1)
+		while (x < e->x1)
 		{
-			mlx_pixel_put(param->mlx, param->win, x, y, param->color);
+			mlx_pixel_put(e->mlx, e->win, x, y, e->color);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	triangle_left(t_params *param)
+void	triangle_left(t_env *e)
 {
 	int	x;
 	int	y;
 	int	x1;
 
-	y = param->y;
-	x1 = param->x;
-	while (y < param->y1)
+	y = e->y;
+	x1 = e->x;
+	while (y < e->y1)
 	{
 		x1++;
-		x = param->x;
+		x = e->x;
 		while (x < x1)
 		{
-			mlx_pixel_put(param->mlx, param->win, x, y, param->color);
+			mlx_pixel_put(e->mlx, e->win, x, y, e->color);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	red_point(t_params *param)
+void	red_point(t_env *e)
 {
-	mlx_pixel_put(param->mlx, param->win, param->x, param->y, 0xFF0000);
-	mlx_pixel_put(param->mlx, param->win, param->x1, param->y1, 0xFF0000);
+	mlx_pixel_put(e->mlx, e->win, e->x, e->y, 0xFF0000);
+	mlx_pixel_put(e->mlx, e->win, e->x1, e->y1, 0xFF0000);
 }
 
-void	trace_it(t_params *param, int x_inc, int y_inc)
-{
-	int	x;
-	int	y;
+//void	trace_it(t_env *e, int x_inc, int y_inc)
+//{
+//	int	x;
+//	int	y;
+//
+//	x = e->x;
+//	y = e->y;
+//}
 
-	x = param->x;
-	y = param->y;
-}
-
-void	trace(t_params *param)
+void	trace(t_env *e)
 {
 	int	x;
 	int	y;
@@ -88,10 +88,10 @@ void	trace(t_params *param)
 	int	x_inc;
 	int	y_inc;
 
-	x = param->x;
-	y = param->y;
-	x_inc = (x > param->x1) ? -1 : 1;
-	y_inc = (y > param->y1) ? -1 : 1;
+	x = e->x;
+	y = e->y;
+	x_inc = (x > e->x1) ? -1 : 1;
+	y_inc = (y > e->y1) ? -1 : 1;
 
 	int	dx;
 	int	dy;
@@ -103,17 +103,17 @@ void	trace(t_params *param)
 	int	Dy;
 
 	i = 0;
-	ex = ft_abs(param->x1 - x);
-	ey = ft_abs(param->y1 - y);
+	ex = ft_abs(e->x1 - x);
+	ey = ft_abs(e->y1 - y);
 	dx = 2 * ex;
-	dy = 2 * ft_abs(param->y1 - y);
+	dy = 2 * ft_abs(e->y1 - y);
 	Dx = ex;
 	Dy = ey;
-	if (Dx > Dy)
+	if (dx > Dy)
 	{
 		while (i < Dx)
 		{
-			mlx_pixel_put(param->mlx, param->win, x, y, param->color);
+			mlx_pixel_put(e->mlx, e->win, x, y, e->color);
 			i++;
 			x += x_inc;
 			ex -= dy;
@@ -128,7 +128,7 @@ void	trace(t_params *param)
 	{
 		while (i < Dy)
 		{
-			mlx_pixel_put(param->mlx, param->win, x, y, param->color);
+			mlx_pixel_put(e->mlx, e->win, x, y, e->color);
 			i++;
 			y += y_inc;
 			ey -= dx;
