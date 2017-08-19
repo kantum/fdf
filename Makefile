@@ -10,7 +10,7 @@ DIR = srcs
 
 LIB = lib
 
-SRCS = main.c draw.c
+SRCS = main.c bresenham.c parser.c
 
 SRC = $(addprefix $(DIR)/,$(SRCS))
 
