@@ -8,7 +8,7 @@ void	quit(t_env *e)
 
 int		key_hook(int keycode, t_env *e)
 {
-	if (keycode == 53 || keycode == 12)
+	if (keycode == 113 || keycode == 53 || keycode == 12)
 		quit(e);
 	else if (keycode == 49)
 		mlx_clear_window(e->mlx, e->win);
@@ -23,6 +23,8 @@ int		mouse_hook(int button, int x, int y, t_env *e)
 		e->x1 = x;
 		e->y1 = y;
 		bresenham(e);
+		e->x = x;
+		e->y = y;
 	}
 	return (0);
 }
@@ -46,7 +48,8 @@ int		main(int argc, char **argv)
 	e->x = 640;
 	e->y = 400;
 	e->color = 0xCCFFCC;
-	e->mlx = mlx_init();
+	if (!(e->mlx = mlx_init()))
+		return (-1);
 	e->win = mlx_new_window(e->mlx, 1280, 800, "win");
 
 	mlx_key_hook(e->win, key_hook, e);
