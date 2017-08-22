@@ -1,9 +1,9 @@
 #ifndef FDF_H
 # define FDF_H
 
-# define RED	= '0xFF0000'
-# define GREEN	= '0x00FF00'
-# define BLUE	= '0x0000FF'
+# define RED	= 0xFF0000
+# define GREEN	= 0x00FF00
+# define BLUE	= 0x0000FF
 
 # include <stdlib.h>
 # include <stdio.h>		//printf()
@@ -29,6 +29,10 @@ struct					s_env
 {
 	void		*mlx;
 	void		*win;
+	int			win_width;
+	int			win_height;
+	int			height;
+	int			width;
 
 	int			fd;
 	
@@ -51,4 +55,5 @@ void					quit(t_env *e);
 t_env					*parser(char *arg, t_env *e);
 void					bresenham(t_env *e);
 void					red_point(t_env *e);
+void					put_pixel(int x, int y, int color);
 #endif
