@@ -41,19 +41,37 @@ struct					s_env
 
 	int			x1;
 	int			y1;
-	int			ex;
-	int			ey;
-	int			dx;
-	int			dy;
 	int			color;
 
 	int			scale;
 	int			**tab;
+	char		*buf;
 };
 
+typedef struct s_bres	t_bres;
+struct					s_bres
+{
+	void		*mlx;
+	void		*win;
+
+	int			x;
+	int			y;
+	int			x1;
+	int			y1;
+
+	int			ex;
+	int			ey;
+	int			dx;
+	int			dy;
+
+	int			color;
+};
+
+void					show(t_env *e);
+void					trace(t_env *e);
 void					quit(t_env *e);
 t_env					*parser(char *arg, t_env *e);
-void					bresenham(t_env *e);
+void					bresenham(t_bres *b);
 void					red_point(t_env *e);
 void					put_pixel(int x, int y, int color);
 #endif

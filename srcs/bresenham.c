@@ -1,68 +1,68 @@
 #include "fdf.h"
 
-void	horizontal(t_env *e,int Dx, int x_inc, int y_inc)
+void	horizontal(t_bres *b,int Dx, int x_inc, int y_inc)
 {
 	int	x;
 	int	y;
 	int	i;
 
 	i = 0;
-	x = e->x;
-	y = e->y;
+	x = b->x;
+	y = b->y;
 	while (i < Dx)
 	{
-		mlx_pixel_put(e->mlx, e->win, x, y, e->color);
+		mlx_pixel_put(b->mlx, b->win, x, y, b->color);
 		i++;
 		x += x_inc;
-		e->ex -= e->dy;
-		if (e->ex < 0)
+		b->ex -= b->dy;
+		if (b->ex < 0)
 		{
 			y += y_inc;
-			e->ex += e->dx;
+			b->ex += b->dx;
 		}
 	}
 }
 
-void	vertical(t_env *e, int Dy, int x_inc, int y_inc)
+void	vertical(t_bres *b, int Dy, int x_inc, int y_inc)
 {
 	int	x;
 	int	y;
 	int	i;
 
 	i = 0;
-	x = e->x;
-	y = e->y;
+	x = b->x;
+	y = b->y;
 	while (i < Dy)
 	{
-		mlx_pixel_put(e->mlx, e->win, x, y, e->color);
+		mlx_pixel_put(b->mlx, b->win, x, y, b->color);
 		i++;
 		y += y_inc;
-		e->ey -= e->dx;
-		if (e->ey < 0)
+		b->ey -= b->dx;
+		if (b->ey < 0)
 		{
 			x +=  x_inc;
-			e->ey += e->dy;
+			b->ey += b->dy;
 		}
 	}
 }
 
-void	bresenham(t_env *e)
+void	bresenham(t_bres *b)
 {
 	int	x_inc;
 	int	y_inc;
 	int	Dx;
 	int	Dy;
 
-	x_inc = (e->x > e->x1) ? -1 : 1;
-	y_inc = (e->y > e->y1) ? -1 : 1;
-	e->ex = ft_abs(e->x1 - e->x);
-	e->ey = ft_abs(e->y1 - e->y);
-	e->dx = 2 * e->ex;
-	e->dy = 2 * e->ey;
-	Dx = e->ex;
-	Dy = e->ey;
+	x_inc = (b->x > b->x1) ? -1 : 1;
+	y_inc = (b->y > b->y1) ? -1 : 1;
+	b->ex = ft_abs(b->x1 - b->x);
+	b->ey = ft_abs(b->y1 - b->y);
+	b->dx = 2 * b->ex;
+	b->dy = 2 * b->ey;
+	Dx = b->ex;
+	Dy = b->ey;
 	if (Dx < Dy)
-		vertical(e, Dy, x_inc, y_inc);
+		vertical(b, Dy, x_inc, y_inc);
 	else
-		horizontal(e, Dx, x_inc, y_inc);
+		horizontal(b, Dx, x_inc, y_inc);
 }
