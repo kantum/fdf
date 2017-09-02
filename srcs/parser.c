@@ -1,25 +1,22 @@
 #include "fdf.h"
 #include "libft.h"
 
-static int		get_height(char *str)
+static int	get_height(char *str)
 {
 	int	i;
 	int	k;
 
-	i = 0;
+	i = -1;
 	k = 0;
-	while(str[i])
-	{
-		if (str[i] == '\n' )
+	while (str[++i])
+		if (str[i] == '\n')
 			k++;
-		i++;
-	}
 	if ((str[i - 1] != '\n'))
 		k++;
 	return (k);
 }
 
-static int		count_field(char const *s, char c)
+static int	count_field(char const *s, char c)
 {
 	int	i;
 	int	read;
@@ -61,6 +58,7 @@ static void	*scan_input(t_env *e)
 		return (NULL);
 	e->width = count_field(e->buf, ' ');
 	e->height = get_height(e->buf);
+	e->totalsize = e->width * e->height;
 	close(e->fd);
 	return(e);
 }
@@ -73,7 +71,7 @@ static void	*fill_tab(t_env *e)
 
 	i = -1;
 	k = -1;
-	if (!(e->tab = (int**)malloc(sizeof(int*) * e->width + 1)))
+	if (!(e->tab = (int**)malloc(sizeof(int*) * e->height + 1)))
 		return (NULL);
 	while (get_next_line(e->fd, &e->buf))
 	{
@@ -82,6 +80,7 @@ static void	*fill_tab(t_env *e)
 		while (++i < e->width)
 			e->tab[k][i] = ft_atoi(tmp[i]);
 		i = -1;
+		free(e->buf);
 		free(tmp);
 	}
 	e->tab[k] = NULL;
@@ -89,7 +88,7 @@ static void	*fill_tab(t_env *e)
 	return (e);
 }
 
-t_env	*parser(char *arg, t_env *e)
+t_env		*parser(char *arg, t_env *e)
 {
 	e->fd = open(arg, O_RDONLY);
 	if (!(scan_input(e)))
@@ -99,4 +98,3 @@ t_env	*parser(char *arg, t_env *e)
 		return (NULL);
 	return (e);
 }
-

@@ -2,7 +2,7 @@ NAME = fdf
 
 CC = clang
 
-CFLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 
 LFLAGS = -Llibft -lft -L$(MINILIB) -lmlx
 
@@ -10,7 +10,7 @@ DIR = srcs
 
 LIB = lib
 
-SRCS = main.c bresenham.c parser.c show.c
+SRCS = main.c bresenham.c parser.c show.c hook.c iso.c
 
 SRC = $(addprefix $(DIR)/,$(SRCS))
 

@@ -4,18 +4,21 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-ADDS	Makefile	/^	ADDS = -L\/usr\/X11\/lib -lXext -lx11$/;"	m
+0	Session.vim	/^normal! 0$/;"	m
+08|	Session.vim	/^normal! 08|$/;"	m
+ADDS	Makefile	/^	ADDS = -L\/usr\/X11\/lib -lXext -lX11$/;"	m
 ADDS	Makefile	/^	ADDS = -framework OpenGl -framework AppKit$/;"	m
 AR	libft/Makefile	/^AR      = 	ar$/;"	m
 ARFLAGS	libft/Makefile	/^ARFLAGS = 	rcs$/;"	m
 BLUE	includes/fdf.h	/^# define BLUE	/;"	d
 BUFF_SIZE	includes/libft.h	/^# define BUFF_SIZE /;"	d
 BUFF_SIZE	libft/includes/libft.h	/^# define BUFF_SIZE /;"	d
+CC	Makefile	/^	CC = gcc$/;"	m
 CC	Makefile	/^CC = clang$/;"	m
 CC	libft/Makefile	/^CC      = 	gcc$/;"	m
 CC	minilibx/Makefile.mk	/^CC		=	gcc$/;"	m
 CC	minilibx/test/Makefile.mk	/^CC=gcc$/;"	m
-CFLAGS	Makefile	/^CFLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=address$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address$/;"	m
 CFLAGS	libft/Makefile	/^CFLAGS  = 	-Wall -Wextra -Werror$/;"	m
 CFLAGS	minilibx/Makefile.mk	/^CFLAGS	=	-O3 -I$(INC)$/;"	m
 CFLAGS	minilibx/test/Makefile.mk	/^CFLAGS= -I$(INC) -O3 -I..$/;"	m
@@ -85,8 +88,9 @@ SRC	minilibx/Makefile.mk	/^SRC		=	mlx_init.c \\$/;"	m
 SRC	minilibx/test/Makefile.mk	/^SRC = main.c$/;"	m
 SRC	minilibx_macos_el_capitan/Makefile	/^SRC= mlx_shaders.c mlx_new_window.m mlx_init_loop.m mlx_new_image.m mlx_xpm.c mlx_int_str_to_wordtab.c$/;"	m
 SRC	minilibx_macos_sierra/Makefile	/^SRC= mlx_shaders.c mlx_new_window.m mlx_init_loop.m mlx_new_image.m mlx_xpm.c mlx_int_str_to_wordtab.c$/;"	m
-SRCS	Makefile	/^SRCS = main.c bresenham.c parser.c$/;"	m
+SRCS	Makefile	/^SRCS = main.c bresenham.c parser.c show.c hook.c iso.c$/;"	m
 SRCS	libft/Makefile	/^SRCS	=															\\$/;"	m
+SessionLoad	Session.vim	/^let SessionLoad = 1$/;"	v
 UNAME_R	Makefile	/^	UNAME_R := $(shell uname -r)$/;"	m
 UNAME_S	Makefile	/^UNAME_S := $(shell uname -s)$/;"	m
 UNIQ_BPP	minilibx_macos_el_capitan/mlx_int.h	/^#define UNIQ_BPP	/;"	d
@@ -103,12 +107,14 @@ bpp1	minilibx/test/main.c	/^int	bpp1;$/;"	v
 bpp2	minilibx/test/main.c	/^int	bpp2;$/;"	v
 bpp3	minilibx/test/main.c	/^int	bpp3;$/;"	v
 bpp4	minilibx/test/main.c	/^int	bpp4;$/;"	v
-bresenham	srcs/bresenham.c	/^void	bresenham(t_env *e)$/;"	f
+bres	includes/fdf.h	/^	int			bres;$/;"	m	struct:s_env
+bresenham	srcs/bresenham.c	/^void		bresenham(int x, int x1, int y, int y1, t_env *e)$/;"	f
+buf	includes/fdf.h	/^	char		*buf;$/;"	m	struct:s_env
 buffer	minilibx_macos_el_capitan/mlx_int.h	/^  char			*buffer;$/;"	m	struct:mlx_img_list_s
 buffer	minilibx_macos_sierra/mlx_int.h	/^  char			*buffer;$/;"	m	struct:mlx_img_list_s
 bytes_per_pixel	minilibx_macos_el_capitan/font.c	/^  unsigned int 	 bytes_per_pixel; \/* 2:RGB16, 3:RGB, 4:RGBA *\/ $/;"	m	struct:__anon1	file:
 bytes_per_pixel	minilibx_macos_sierra/font.c	/^  unsigned int 	 bytes_per_pixel; \/* 2:RGB16, 3:RGB, 4:RGBA *\/ $/;"	m	struct:__anon2	file:
-cat_read	srcs/parser.c	/^char	*cat_read(int fd)$/;"	f
+cartesian	srcs/iso.c	/^void	cartesian(t_env *e)$/;"	f
 cmap	minilibx/mlx_int.h	/^  Colormap	cmap;$/;"	m	struct:s_xvar
 col	minilibx/mlx_int.h	/^  int		col;$/;"	m	struct:s_xpm_col
 col	minilibx_macos_el_capitan/mlx_xpm.c	/^  int           col;$/;"	m	struct:s_xpm_col	file:
@@ -124,7 +130,7 @@ content	includes/libft.h	/^	void		*content;$/;"	m	struct:s_list
 content	libft/includes/libft.h	/^	void		*content;$/;"	m	struct:s_list
 content_size	includes/libft.h	/^	size_t		content_size;$/;"	m	struct:s_list
 content_size	libft/includes/libft.h	/^	size_t		content_size;$/;"	m	struct:s_list
-count_field	srcs/parser.c	/^int		count_field(char const *s, char c)$/;"	f
+count_field	srcs/parser.c	/^static int		count_field(char const *s, char c)$/;"	f	file:
 data	minilibx/mlx_int.h	/^  char		*data;$/;"	m	struct:s_img
 data1	minilibx/test/main.c	/^char	*data1;$/;"	v
 data2	minilibx/test/main.c	/^char	*data2;$/;"	v
@@ -144,12 +150,13 @@ endian3	minilibx/test/main.c	/^int	endian3;$/;"	v
 endian4	minilibx/test/main.c	/^int	endian4;$/;"	v
 ex	includes/fdf.h	/^	int			ex;$/;"	m	struct:s_env
 expose_hook	minilibx/mlx_int.h	/^  int			(*expose_hook)();$/;"	m	struct:s_win_list
-expose_hook	srcs/main.c	/^int		expose_hook(t_env *e)$/;"	f
+expose_hook	srcs/hook.c	/^int		expose_hook(t_env *e)$/;"	f
 expose_param	minilibx/mlx_int.h	/^  void			*expose_param;$/;"	m	struct:s_win_list
 expose_win1	minilibx/test/main.c	/^int	expose_win1(void *p)$/;"	f
 expose_win2	minilibx/test/main.c	/^int	expose_win2(void *p)$/;"	f
 ey	includes/fdf.h	/^	int			ey;$/;"	m	struct:s_env
 fd	includes/fdf.h	/^	int			fd;$/;"	m	struct:s_env
+fill_tab	srcs/parser.c	/^static void	*fill_tab(t_env *e)$/;"	f	file:
 font	minilibx_macos_el_capitan/mlx_int.h	/^  mlx_img_list_t	*font;$/;"	m	struct:mlx_ptr_s
 font	minilibx_macos_sierra/mlx_int.h	/^  mlx_img_list_t	*font;$/;"	m	struct:mlx_ptr_s
 font_atlas	minilibx_macos_el_capitan/font.c	/^} font_atlas = {$/;"	v	typeref:struct:__anon1	file:
@@ -233,8 +240,7 @@ func_t	minilibx_macos_sierra/mlx_int.h	/^typedef int (*func_t)();$/;"	t
 gc	minilibx/mlx_int.h	/^  GC			gc;$/;"	m	struct:s_win_list
 gc	minilibx/mlx_int.h	/^  GC		gc;$/;"	m	struct:s_img
 gere_mouse	minilibx/test/new_win.c	/^int gere_mouse(int x,int y,int button,void*toto)$/;"	f
-get_height	srcs/parser.c	/^int		get_height(char *str)$/;"	f
-get_length	srcs/parser.c	/^int		get_length(char *str)$/;"	f
+get_height	srcs/parser.c	/^static int		get_height(char *str)$/;"	f	file:
 get_next_line	libft/srcs/get_next_line.c	/^int				get_next_line(const int fd, char **line)$/;"	f
 glsl_info_s	minilibx_macos_el_capitan/mlx_int.h	/^typedef struct	glsl_info_s$/;"	s
 glsl_info_s	minilibx_macos_sierra/mlx_int.h	/^typedef struct	glsl_info_s$/;"	s
@@ -248,7 +254,7 @@ height	minilibx_macos_sierra/font.c	/^  unsigned int 	 height;$/;"	m	struct:__an
 height	minilibx_macos_sierra/mlx_int.h	/^  int			height;$/;"	m	struct:mlx_img_list_s
 hook	minilibx/mlx_int.h	/^  int		(*hook)();$/;"	m	struct:s_event_list
 hooks	minilibx/mlx_int.h	/^  t_event_list		hooks[MLX_MAX_EVENT];$/;"	m	struct:s_win_list
-horizontal	srcs/bresenham.c	/^void	horizontal(t_env *e,int Dx, int x_inc, int y_inc)$/;"	f
+horizontal	srcs/bresenham.c	/^static void	horizontal(t_env *e,int Dx, int x_inc, int y_inc)$/;"	f	file:
 im1	minilibx/test/main.c	/^void    *im1;$/;"	v
 im2	minilibx/test/main.c	/^void	*im2;$/;"	v
 im3	minilibx/test/main.c	/^void	*im3;$/;"	v
@@ -266,8 +272,10 @@ img_list	minilibx_macos_el_capitan/mlx_int.h	/^  mlx_img_ctx_t		*img_list;$/;"	m
 img_list	minilibx_macos_el_capitan/mlx_int.h	/^  mlx_img_list_t	*img_list;$/;"	m	struct:mlx_ptr_s
 img_list	minilibx_macos_sierra/mlx_int.h	/^  mlx_img_ctx_t		*img_list;$/;"	m	struct:mlx_win_list_s
 img_list	minilibx_macos_sierra/mlx_int.h	/^  mlx_img_list_t	*img_list;$/;"	m	struct:mlx_ptr_s
+init	srcs/main.c	/^int		init(t_env *e)$/;"	f
+isometric	srcs/iso.c	/^int		isometric(t_env *e)$/;"	f
 key_hook	minilibx/mlx_int.h	/^  int			(*key_hook)();$/;"	m	struct:s_win_list
-key_hook	srcs/main.c	/^int		key_hook(int keycode, t_env *e)$/;"	f
+key_hook	srcs/hook.c	/^int		key_hook(int keycode, t_env *e)$/;"	f
 key_param	minilibx/mlx_int.h	/^  void			*key_param;$/;"	m	struct:s_win_list
 key_win1	minilibx/test/main.c	/^int	key_win1(int key,void *p)$/;"	f
 key_win2	minilibx/test/main.c	/^int	key_win2(int key,void *p)$/;"	f
@@ -312,6 +320,7 @@ loop_hook_data	minilibx_macos_sierra/mlx_int.h	/^  void			*loop_hook_data;$/;"	m
 loop_param	minilibx/mlx_int.h	/^  void		*loop_param;$/;"	m	struct:s_xvar
 loop_timer	minilibx_macos_el_capitan/mlx_int.h	/^  void			*loop_timer;$/;"	m	struct:mlx_ptr_s
 loop_timer	minilibx_macos_sierra/mlx_int.h	/^  void			*loop_timer;$/;"	m	struct:mlx_ptr_s
+m	includes/fdf.h	/^	t_point		*m;$/;"	m	struct:s_env
 main	minilibx/test/main.c	/^int	main()$/;"	f
 main	minilibx/test/new_win.c	/^int main()$/;"	f
 main	srcs/main.c	/^int		main(int argc, char **argv)$/;"	f
@@ -431,7 +440,7 @@ mlx_xpm_to_image	minilibx/mlx_xpm.c	/^void	*mlx_xpm_to_image(t_xvar *xvar,char *
 mlx_xpm_to_image	minilibx_macos_el_capitan/mlx_xpm.c	/^void	*mlx_xpm_to_image(mlx_ptr_t *xvar,char **xpm_data,int *width,int *height)$/;"	f
 mlx_xpm_to_image	minilibx_macos_sierra/mlx_xpm.c	/^void	*mlx_xpm_to_image(mlx_ptr_t *xvar,char **xpm_data,int *width,int *height)$/;"	f
 mouse_hook	minilibx/mlx_int.h	/^  int			(*mouse_hook)();$/;"	m	struct:s_win_list
-mouse_hook	srcs/main.c	/^int		mouse_hook(int button, int x, int y, t_env *e)$/;"	f
+mouse_hook	srcs/hook.c	/^int		mouse_hook(int button, int x, int y, t_env *e)$/;"	f
 mouse_param	minilibx/mlx_int.h	/^  void			*mouse_param;$/;"	m	struct:s_win_list
 mouse_win1	minilibx/test/main.c	/^int	mouse_win1(int button,int x,int y, void *p)$/;"	f
 mouse_win2	minilibx/test/main.c	/^int	mouse_win2(int button,int x,int y, void *p)$/;"	f
@@ -468,8 +477,15 @@ pixmgt	minilibx_macos_el_capitan/mlx_int.h	/^  int			pixmgt;$/;"	m	struct:mlx_wi
 pixmgt	minilibx_macos_sierra/mlx_int.h	/^  int			pixmgt;$/;"	m	struct:mlx_win_list_s
 private_cmap	minilibx/mlx_int.h	/^  int		private_cmap;$/;"	m	struct:s_xvar
 pshm_format	minilibx/mlx_int.h	/^  int		pshm_format;$/;"	m	struct:s_xvar
-quit	srcs/main.c	/^void	quit(t_env *e)$/;"	f
+put_pixel	srcs/show.c	/^void	put_pixel(void *mlx, void *win, int x, int y, int color)$/;"	f
+quit	srcs/hook.c	/^void	quit(t_env *e)$/;"	f
 root	minilibx/mlx_int.h	/^  Window	root;$/;"	m	struct:s_xvar
+s:l	Session.vim	/^let s:l = 1 - ((0 * winheight(0) + 42) \/ 85)$/;"	v
+s:l	Session.vim	/^let s:l = 1 - ((0 * winheight(0) + 8) \/ 17)$/;"	v
+s:l	Session.vim	/^let s:l = 2 - ((1 * winheight(0) + 42) \/ 85)$/;"	v
+s:so_save	Session.vim	/^let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0$/;"	v
+s:sx	Session.vim	/^let s:sx = expand("<sfile>:p:r")."x.vim"$/;"	v
+s:wipebuf	Session.vim	/^  let s:wipebuf = bufnr('%')$/;"	v
 s_col_name	minilibx/mlx_int.h	/^struct	s_col_name$/;"	s
 s_col_name	minilibx_macos_el_capitan/mlx_xpm.c	/^struct  s_col_name$/;"	s	file:
 s_col_name	minilibx_macos_sierra/mlx_xpm.c	/^struct  s_col_name$/;"	s	file:
@@ -485,10 +501,12 @@ s_xpm_col	minilibx_macos_el_capitan/mlx_xpm.c	/^typedef struct  s_xpm_col$/;"	s	
 s_xpm_col	minilibx_macos_sierra/mlx_xpm.c	/^typedef struct  s_xpm_col$/;"	s	file:
 s_xvar	minilibx/mlx_int.h	/^typedef struct	s_xvar$/;"	s
 scale	includes/fdf.h	/^	int			scale;$/;"	m	struct:s_env
+scan_input	srcs/parser.c	/^static void	*scan_input(t_env *e)$/;"	f	file:
 screen	minilibx/mlx_int.h	/^  int		screen;$/;"	m	struct:s_xvar
 shm	minilibx/mlx_int.h	/^  XShmSegmentInfo shm;$/;"	m	struct:s_img
 shm_att_pb	minilibx/mlx_new_image.c	/^int	shm_att_pb(Display *d,XErrorEvent *ev)$/;"	f
-show	srcs/main.c	/^void	show(t_env *e)$/;"	f
+show	srcs/show.c	/^void	show(t_env *e)$/;"	f
+show_m	srcs/show.c	/^void	show_m(t_env *e)$/;"	f
 size_line	minilibx/mlx_int.h	/^  int		size_line;$/;"	m	struct:s_img
 sl1	minilibx/test/main.c	/^int	sl1;$/;"	v
 sl2	minilibx/test/main.c	/^int	sl2;$/;"	v
@@ -508,13 +526,17 @@ t_xvar	minilibx/mlx_int.h	/^} t_xvar;$/;"	t	typeref:struct:s_xvar
 tab	includes/fdf.h	/^	int			**tab;$/;"	m	struct:s_env
 texture	minilibx_macos_el_capitan/mlx_int.h	/^  GLuint		texture;$/;"	m	struct:mlx_img_ctx_s
 texture	minilibx_macos_sierra/mlx_int.h	/^  GLuint		texture;$/;"	m	struct:mlx_img_ctx_s
+tg_trace	srcs/hook.c	/^void	tg_trace(t_env *e)$/;"	f
+totalsize	includes/fdf.h	/^	int			totalsize;$/;"	m	struct:s_env
+trace	srcs/show.c	/^void	trace(t_env *e)$/;"	f
+trace_m	srcs/show.c	/^void	trace_m(t_env *e)$/;"	f
 type	minilibx/mlx_int.h	/^  int		type;$/;"	m	struct:s_img
 use_xshm	minilibx/mlx_int.h	/^  int		use_xshm;$/;"	m	struct:s_xvar
 vbuffer	minilibx_macos_el_capitan/mlx_int.h	/^  GLuint		vbuffer;$/;"	m	struct:mlx_img_ctx_s
 vbuffer	minilibx_macos_sierra/mlx_int.h	/^  GLuint		vbuffer;$/;"	m	struct:mlx_img_ctx_s
 vertexes	minilibx_macos_el_capitan/mlx_int.h	/^  GLfloat		vertexes[8];$/;"	m	struct:mlx_img_list_s
 vertexes	minilibx_macos_sierra/mlx_int.h	/^  GLfloat		vertexes[8];$/;"	m	struct:mlx_img_list_s
-vertical	srcs/bresenham.c	/^void	vertical(t_env *e, int Dy, int x_inc, int y_inc)$/;"	f
+vertical	srcs/bresenham.c	/^static void	vertical(t_env *e, int Dy, int x_inc, int y_inc)$/;"	f	file:
 visual	minilibx/mlx_int.h	/^  Visual	*visual;$/;"	m	struct:s_xvar
 width	includes/fdf.h	/^	int			width;$/;"	m	struct:s_env
 width	minilibx/mlx_int.h	/^  int		width;$/;"	m	struct:s_img
@@ -539,8 +561,13 @@ winid	minilibx_macos_sierra/mlx_int.h	/^  void			*winid;$/;"	m	struct:mlx_win_li
 x	includes/fdf.h	/^	int					x;$/;"	m	struct:s_point
 x	includes/fdf.h	/^	int			x;$/;"	m	struct:s_env
 x1	includes/fdf.h	/^	int			x1;$/;"	m	struct:s_env
+x2	includes/fdf.h	/^	int			x2;$/;"	m	struct:s_env
 xpm1_x	minilibx/test/main.c	/^int	xpm1_x;$/;"	v
 xpm1_y	minilibx/test/main.c	/^int	xpm1_y;$/;"	v
 y	includes/fdf.h	/^	int					y;$/;"	m	struct:s_point
 y	includes/fdf.h	/^	int			y;$/;"	m	struct:s_env
 y1	includes/fdf.h	/^	int			y1;$/;"	m	struct:s_env
+y2	includes/fdf.h	/^	int			y2;$/;"	m	struct:s_env
+z	includes/fdf.h	/^	int					z;$/;"	m	struct:s_point
+zoom	srcs/hook.c	/^int		zoom(int keycode, t_env *e)$/;"	f
+zt	Session.vim	/^normal! zt$/;"	m
