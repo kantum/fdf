@@ -51,6 +51,7 @@ struct					s_env
 	int			dy;
 
 	int			bres;
+	int			iso;
 	int			scale;
 	int			**tab;
 	t_point		*m;

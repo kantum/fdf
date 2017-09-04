@@ -9,16 +9,17 @@ int		init(t_env *e)
 	e->scale = ((e->win_width / e->width) + (e->win_height / e->height)) / 4;
 	e->color = 0xCCFFCC;
 	e->bres = 0;
+	e->iso = 0;
 	e->x = (e->win_width / 2) - ((e->width * e->scale) / 2);
 	e->y = (e->win_height / 2) - ((e->height * e->scale) / 2);
 	e->win = mlx_new_window(e->mlx, e->win_width, e->win_height, "win");
-	e->m = NULL;
 	return (0);
 }
 
 int		main(int argc, char **argv)
 {
 	t_env		e;
+
 	if (argc < 2 || argc > 3)
 		return (-1);
 	if (argc == 2)

@@ -6,26 +6,24 @@ int		isometric(t_env *e)
 	int		k;
 	int		l;
 
-	i = 0;
-	k = 0;
+	i = -1;
+	k = -1;
 	l = -1;
 	if (!(e->m = (t_point*)malloc(sizeof(t_point) * e->totalsize)))
 		return (0);
-	while (i < e->height)
+	while (++i < e->height)
 	{
 		e->y1 = e->y + i * e->scale;
-		while (k < e->width)
+		while (++k < e->width)
 		{
 			e->x1 = e->x + k * e->scale;
 			e->m[++l].x = e->x1 - e->y1 + e->x;
 			e->m[l].y = (e->x1 + e->y1) / 2;
-			if (e->tab[i])
-				e->m[l].z = (e->tab[i][k]);
-			k++;
+			e->m[l].z = (e->tab[i][k]);
 		}
-		k = 0;
-		i++;
+		k = -1;
 	}
+	e->iso = 1;
 	return (1);
 }
 
@@ -33,20 +31,19 @@ void	cartesian(t_env *e)
 {
 	free(e->m);
 	e->m = NULL;
+	e->iso = 0;
 }
 
 void	tg_iso(t_env *e)
 {
-	static int toggle = 0;
-
-	if (toggle)
+	if (e->iso)
 	{
 		mlx_clear_window(e->mlx, e->win);
 		cartesian(e);
 		if (e->bres)
 			trace(e);
 		show(e);
-		toggle = 0;
+		e->iso = 0;
 	}
 	else
 	{
@@ -55,24 +52,21 @@ void	tg_iso(t_env *e)
 		if (e->bres)
 			trace(e);
 		show(e);
-		toggle = 1;
+		e->iso = 1;
 	}
 }
 
 void	tg_trace(t_env *e)
 {
-	static int	toggle = 0;
-
-	if (toggle)
+	if (e->bres)
 	{
 		mlx_clear_window(e->mlx, e->win);
 		show(e);
-		toggle = 0;
+		e->bres = 0;
 	}
 	else
 	{
 		trace(e);
-		toggle = 1;
 		e->bres = 1;
 	}
 }

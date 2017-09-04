@@ -22,10 +22,10 @@ static int	count_field(char const *s, char c)
 	int	read;
 	int	field;
 
-	i = 0;
+	i = -1;
 	read = 0;
 	field = 0;
-	while (s[i] && s[i] != '\n')
+	while (s[++i] && s[i] != '\n')
 	{
 		if (s[i] == c)
 			read = 0;
@@ -34,7 +34,6 @@ static int	count_field(char const *s, char c)
 			read = 1;
 			field++;
 		}
-		i++;
 	}
 	return (field);
 }
@@ -42,14 +41,19 @@ static int	count_field(char const *s, char c)
 static void	*scan_input(t_env *e)
 {
 	int		ret;
-	void	*free_ptr;
+	char	*free_ptr;
 	char	rd[BUFF_SIZE + 1];
+	int		l;
 
 	e->buf = ft_strnew(0);
 	while ((ret = read(e->fd, rd, BUFF_SIZE)))
 	{
+		if (!l)
+			l = ret;
+		else if (l != ret)
+			exit(0);
 		rd[ret] = '\0';
-		free_ptr = (void*)e->buf;
+		free_ptr = e->buf;
 		if (!(e->buf = ft_strjoin(e->buf, rd)))
 			return (NULL);
 		free(free_ptr);
@@ -60,7 +64,7 @@ static void	*scan_input(t_env *e)
 	e->height = get_height(e->buf);
 	e->totalsize = e->width * e->height;
 	close(e->fd);
-	return(e);
+	return (e);
 }
 
 static void	*fill_tab(t_env *e)
@@ -83,7 +87,6 @@ static void	*fill_tab(t_env *e)
 		free(e->buf);
 		free(tmp);
 	}
-	e->tab[k] = NULL;
 	close(e->fd);
 	return (e);
 }

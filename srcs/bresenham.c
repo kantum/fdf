@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-static void	horizontal(t_env *e, int Dx, int x_inc, int y_inc)
+static void	horizontal(t_env *e, int mx, int x_inc, int y_inc)
 {
 	int	x;
 	int	y;
@@ -9,7 +9,7 @@ static void	horizontal(t_env *e, int Dx, int x_inc, int y_inc)
 	i = 0;
 	x = e->x2;
 	y = e->y2;
-	while (i < Dx)
+	while (i < mx)
 	{
 		put_pixel(e->mlx, e->win, x, y, e->color);
 		i++;
@@ -23,7 +23,7 @@ static void	horizontal(t_env *e, int Dx, int x_inc, int y_inc)
 	}
 }
 
-static void	vertical(t_env *e, int Dy, int x_inc, int y_inc)
+static void	vertical(t_env *e, int my, int x_inc, int y_inc)
 {
 	int	x;
 	int	y;
@@ -32,7 +32,7 @@ static void	vertical(t_env *e, int Dy, int x_inc, int y_inc)
 	i = 0;
 	x = e->x2;
 	y = e->y2;
-	while (i < Dy)
+	while (i < my)
 	{
 		put_pixel(e->mlx, e->win, x, y, e->color);
 		i++;
@@ -40,7 +40,7 @@ static void	vertical(t_env *e, int Dy, int x_inc, int y_inc)
 		e->ey -= e->dx;
 		if (e->ey < 0)
 		{
-			x +=  x_inc;
+			x += x_inc;
 			e->ey += e->dy;
 		}
 	}
@@ -50,8 +50,8 @@ void		bresenham(int x, int x1, int y, int y1, t_env *e)
 {
 	int	x_inc;
 	int	y_inc;
-	int	Dx;
-	int	Dy;
+	int	mx;
+	int	my;
 
 	e->x2 = x;
 	e->y2 = y;
@@ -61,10 +61,10 @@ void		bresenham(int x, int x1, int y, int y1, t_env *e)
 	e->ey = ft_abs(y1 - y);
 	e->dx = 2 * e->ex;
 	e->dy = 2 * e->ey;
-	Dx = e->ex;
-	Dy = e->ey;
-	if (Dx < Dy)
-		vertical(e, Dy, x_inc, y_inc);
+	mx = e->ex;
+	my = e->ey;
+	if (mx < my)
+		vertical(e, my, x_inc, y_inc);
 	else
-		horizontal(e, Dx, x_inc, y_inc);
+		horizontal(e, mx, x_inc, y_inc);
 }

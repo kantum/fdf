@@ -14,6 +14,8 @@ int		zoom(int keycode, t_env *e)
 		e->scale += 1;
 		e->x = (e->win_width / 2) - ((e->width * e->scale) / 2);
 		e->y = (e->win_height / 2) - ((e->height * e->scale) / 2);
+		if (e->iso)
+			isometric(e);
 		show(e);
 		if (e->bres)
 			trace(e);
@@ -24,6 +26,8 @@ int		zoom(int keycode, t_env *e)
 		e->scale -= 1;
 		e->x = (e->win_width / 2) - ((e->width * e->scale) / 2);
 		e->y = (e->win_height / 2) - ((e->height * e->scale) / 2);
+		if (e->iso)
+			isometric(e);
 		show(e);
 		if (e->bres)
 			trace(e);
