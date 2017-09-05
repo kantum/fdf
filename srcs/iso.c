@@ -13,13 +13,14 @@ int		isometric(t_env *e)
 		return (0);
 	while (++i < e->height)
 	{
-		e->y1 = e->y + i * e->scale;
+		e->b.y = e->y + i * e->scale;
 		while (++k < e->width)
 		{
-			e->x1 = e->x + k * e->scale;
-			e->m[++l].x = e->x1 - e->y1 + e->x;
-			e->m[l].y = (e->x1 + e->y1) / 2;
+			e->b.x = e->x + k * e->scale;
+			e->m[++l].x = e->b.x - e->b.y + e->x;
+			e->m[l].y = (e->b.x + e->b.y) / 2;
 			e->m[l].z = (e->tab[i][k]);
+			e->m[l].color = e->color;
 		}
 		k = -1;
 	}

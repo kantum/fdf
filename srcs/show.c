@@ -1,8 +1,13 @@
 #include "fdf.h"
 
-void	put_pixel(void *mlx, void *win, int x, int y, int color)
+void	put_pixel_(void *mlx, void *win, int x, int y, int color)
 {
 	mlx_pixel_put(mlx, win, x, y, color);
+}
+
+void	put_pixel(void *mlx, void *win, t_point *p)
+{
+	mlx_pixel_put(mlx, win, p->x, p->y, p->color);
 }
 
 void	trace_m(t_env *e)
@@ -31,17 +36,23 @@ void	trace_m(t_env *e)
 void	show_m(t_env *e)
 {
 	int		i;
+	t_point	p;
 
 	i = -1;
 	mlx_clear_window(e->mlx, e->win);
 	while (++i < e->totalsize)
-		put_pixel(e->mlx, e->win, e->m[i].x, e->m[i].y - e->m[i].z, e->color);
+	{
+		p = e->m[i];
+		p.y -= e->m[i].z;
+		put_pixel(e->mlx, e->win, &p);
+	}
 }
 
 void	show(t_env *e)
 {
 	int			i;
 	int			k;
+	t_point		p;
 
 	i = 0;
 	k = 0;
@@ -50,13 +61,14 @@ void	show(t_env *e)
 		show_m(e);
 		return ;
 	}
+	p.color = e->color;
 	while (i < e->height)
 	{
-		e->y1 = (e->y + i * e->scale);
+		p.y = (e->y + i * e->scale);
 		while (k < e->width)
 		{
-			e->x1 = e->x + k * e->scale;
-			put_pixel(e->mlx, e->win, e->x1, e->y1, e->color);
+			p.x = e->x + k * e->scale;
+			put_pixel(e->mlx, e->win, &p);
 			k++;
 		}
 		k = 0;
@@ -78,16 +90,16 @@ void	trace(t_env *e)
 	}
 	while (++i < e->height)
 	{
-		e->y1 = e->y + i * e->scale;
+		e->b.y = e->y + i * e->scale;
 		while (++k < e->width)
 		{
-			e->x1 = e->x + k * e->scale;
-			e->x2 = e->x1 + e->scale;
+			e->b.x = e->x + k * e->scale;
+			e->x2 = e->b.x + e->scale;
 			if (k < e->width - 1)
-				bresenham(e->x1, e->x2, e->y1, e->y1, e);
-			e->y2 = e->y1 + e->scale;
+				bresenham(e->b.x, e->x2, e->b.y, e->b.y, e);
+			e->y2 = e->b.y + e->scale;
 			if (i < e->height - 1)
-				bresenham(e->x1, e->x1, e->y1, e->y2, e);
+				bresenham(e->b.x, e->b.x, e->b.y, e->y2, e);
 		}
 		k = -1;
 	}

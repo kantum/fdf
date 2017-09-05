@@ -42,6 +42,8 @@ struct					s_env
 	int			y;
 	int			x1;
 	int			y1;
+	t_point		a;
+	t_point		b;
 	int			x2;
 	int			y2;
 	int			color;
@@ -50,28 +52,31 @@ struct					s_env
 	int			dx;
 	int			dy;
 
-	int			bres;
+	t_point		*m;
 	int			iso;
+	int			bres;
 	int			scale;
 	int			**tab;
-	t_point		*m;
 	char		*buf;
 };
 
-void					tg_trace(t_env *e);
+void					trace(t_env *e);
 void					quit(t_env *e);
 void					show(t_env *e);
+void					show_m(t_env *e);
 void					tg_iso(t_env *e);
+void					tg_trace(t_env *e);
 int						isometric(t_env *e);
 void					red_point(t_env *e);
-void					show_m(t_env *e);
+int						get_height(char *str);
 int						expose_hook(t_env *e);
 int						zoom(int keycode, t_env *e);
 t_env					*parser(char *arg, t_env *e);
 int						key_hook(int keycode, t_env *e);
-void					trace(t_env *e);
+int						count_field(char const *s, char c);
 void					bresenham(int x, int x1, int y, int y1, t_env *e);
-void					put_pixel(void *mlx, void *win, int x, int y, int color);
+void					put_pixel_(void *mlx, void *win, int x, int y, int color);
+void					put_pixel(void *mlx, void *win, t_point *p);
 int						mouse_hook(int button, int x, int y, t_env *e);
 
 #endif

@@ -50,17 +50,19 @@ int		key_hook(int keycode, t_env *e)
 	return (0);
 }
 
-int		mouse_hook(int button, int x, int y, t_env *e)
-{
-	printf("mouse : %d (%d:%d)\n", button, x, y);
-	if (button == 1)
-		bresenham(e->x, x, e->y, y, e);
-	return (0);
-}
+//int		mouse_hook(int button, int x, int y, t_env *e)
+//{
+//	printf("mouse : %d (%d:%d)\n", button, x, y);
+//	if (button == 1)
+//		bresenham(e->x, x, e->y, y, e);
+//	return (0);
+//}
 
 int		expose_hook(t_env *e)
 {
 	(void)e;
 	show(e);
+	if (e->bres)
+		trace(e);
 	return (0);
 }

@@ -10,7 +10,8 @@ DIR = srcs
 
 LIB = lib
 
-SRCS = main.c bresenham.c parser.c show.c hook.c iso.c
+SRCS = main.c bresenham.c parser.c show.c hook.c iso.c count_field.c	\
+	   get_height.c
 
 SRC = $(addprefix $(DIR)/,$(SRCS))
 
