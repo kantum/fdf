@@ -61,23 +61,24 @@ static void	*fill_tab(t_obj *o)
 
 	i = -1;
 	k = -1;
-	if (!(o->tab = (t_point**)malloc(sizeof(t_point*) * o->height + 1)))
+	if (!(o->tab = (t_point**)malloc(sizeof(t_point*) * o->height)))
 		return (NULL);
 	while(get_next_line(o->fd, &o->buf))
 	{
 		o->width = count_field(o->buf, ' ');
 		check_length(o);
+		o->tab[++i] = (t_point*)malloc((sizeof(t_point) * o->width));
 		tmp = ft_strsplit(o->buf, ' ');
-		while (++i < o->width)
+		while (++k < o->width)
 		{
-			o->tab[++k] = (t_point*)malloc((sizeof(t_point) * o->width + 1));
-			o->p->x = i;
-			o->p->y = k;
-			o->p->z = tmp[i][k];
+			o->tab[i][k].x = k;
+			o->tab[i][k].y = i;
+			o->tab[i][k].z = ft_atoi(tmp[k]);
 		}
-		i = -1;
+		k = -1;
 		free(tmp);
 	}
+	free(o->buf);
 	close(o->fd);
 	return (o);
 }
@@ -87,6 +88,7 @@ t_obj		*parser(char *arg, t_obj *o)
 	o->fd = open(arg, O_RDONLY);
 	if (!scan_input(o))
 		return (NULL);
+	o->fd = open(arg, O_RDONLY);
 	if (!fill_tab(o))
 		return (NULL);
 	return (o);

@@ -43,15 +43,6 @@ struct					s_env
 	int		win_height;
 	int		scale;
 	t_point	origin;
-	/*this is for temporary purpose*/
-	t_point	a;
-	t_point	b;
-	int		color;
-	int		ex;
-	int		ey;
-	int		dx;
-	int		dy;
-
 };
 
 typedef struct s_bres	t_bres;
@@ -68,14 +59,15 @@ struct					s_bres
 void					init_point(t_point *p);
 int						init(t_env *e, t_obj *o);
 t_point					*newmap(void const *content, size_t content_size);
-int						ft_getnline(char *str);		//not to be included TODO
+//int						ft_getnline(char *str);		//not to be included TODO
 t_obj					*parser(char *arg, t_obj *o);
 void					put_pixel(void *mlx, void *win, t_point *p);
-//void					bresenham(t_point a, t_point b, t_env *e);
-void					bresenham(t_point *a, t_point *b, t_env *e);
+void					bresenham(t_point a, t_point b, t_env *e);
 int						key_hook(int keycode, t_env *e);
 void					quit(t_env *e);
 int						mouse_hook(int button, int x, int y, t_env *e);
-int						expose_hook(t_env *e);
+void					draw(t_obj *o, t_env *e);
+//int						expose_hook(t_env *e);
+int						expose_hook(t_obj *o,t_env *e);
 
 #endif

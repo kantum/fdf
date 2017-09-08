@@ -14,7 +14,7 @@ int		init(t_env *e, t_obj *o)
 		return (-1);
 	e->win_width = 1280;
 	e->win_height = 800;
-	e->scale = 10;// ((e->win_width / o->width) + (e->win_height / o->height)) / 4;
+	e->scale = ((e->win_width / o->width) + (e->win_height / o->height)) / 4;
 	o->bres = 0;
 	e->origin.x = 10;//(e->win_width / 2) - ((o->width * e->scale) / 2);
 	e->origin.y = 10;//(e->win_height / 2) - ((o->height * e->scale) / 2);
