@@ -78,18 +78,17 @@ static void	*fill_tab(t_obj *o)
 		k = -1;
 		free(tmp);
 	}
-	free(o->buf);
 	close(o->fd);
 	return (o);
 }
 
-t_obj		*parser(char *arg, t_obj *o)
+t_env		*parser(char *arg, t_env *e)
 {
-	o->fd = open(arg, O_RDONLY);
-	if (!scan_input(o))
+	e->o.fd = open(arg, O_RDONLY);
+	if (!scan_input(&e->o))
 		return (NULL);
-	o->fd = open(arg, O_RDONLY);
-	if (!fill_tab(o))
+	e->o.fd = open(arg, O_RDONLY);
+	if (!fill_tab(&e->o))
 		return (NULL);
-	return (o);
+	return (e);
 }

@@ -12,7 +12,8 @@ int		key_hook(int keycode, t_env *e)
 		quit(e);
 	else if (keycode == 49)
 		mlx_clear_window(e->mlx, e->win);
-	//else if (keycode == 13)
+	else if (keycode == 13)
+		rota(e, 10);
 	return (0);
 }
 
@@ -34,9 +35,9 @@ int		mouse_hook(int button, int x, int y, t_env *e)
 	return (0);
 }
 
-int		expose_hook(t_obj *o,t_env *e)
+int		expose_hook(t_env *e)
 {
 	(void)e;
-	draw(o, e);
+	set(e);
 	return (0);
 }
