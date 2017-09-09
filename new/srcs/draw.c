@@ -1,19 +1,23 @@
 #include "fdf.h"
 
-void	put_pixel(void *mlx, void *win, t_point *p)
+void	put_pixel(t_point *p, t_env *e)
 {
-	mlx_pixel_put(mlx, win, p->x, p->y, p->color);
+	if (p->y < e->win_height && p->x < e->win_width &&
+		p->y >= 0 && p->x >= 0)
+		e->data[p->y * e->win_width + p->x] = p->color;
 }
 
-void	color_p(t_point *p)
+void	color_p(t_point *p, t_env *e)
 {
-	p->color = 0xFFFFFF;
+	p->color = e->color;
 }
 
-void	draw(t_env *e)
+void	trace(t_point **tab, t_env *e)
 {
-	int	i;
-	int	k;
+	int			i;
+	int			k;
+	t_point		right;
+	t_point		down;
 
 	i = -1;
 	k = -1;
@@ -21,11 +25,42 @@ void	draw(t_env *e)
 	{
 		while(++k < e->o.width)
 		{
-			color_p(&e->o.tab[i][k]);
-			put_pixel(e->mlx, e->win, &e->o.tab[i][k]);
+			if (i + 1 < e->o.height)
+			{
+				down = tab[i + 1][k];
+				bresenham(T, down, e);
+			}
+			if (k + 1 < e->o.width)
+			{
+				right = tab[i][k + 1];
+				bresenham(T, right, e);
+			}
 		}
 		k = -1;
 	}
+}
+
+void	draw(t_point **tab, t_env *e)
+{
+	int	i;
+	int	k;
+
+	i = -1;
+	k = -1;
+	mlx_clear_window(e->mlx, e->win);
+	init_img(e);
+	if (e->o.bres)
+		trace(tab, e);
+	while(++i < e->o.height)
+	{
+		while(++k < e->o.width)
+		{
+			color_p(&T, e);
+			put_pixel(&T, e);
+		}
+		k = -1;
+	}
+	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 }
 
 
@@ -40,10 +75,9 @@ void	set(t_env *e)
 	{
 		while(++k < e->o.width)
 		{
-			e->o.tab[i][k].x = (e->origin.x + k * e->scale);
-			e->o.tab[i][k].y = (e->origin.y + i * e->scale);
-			color_p(&e->o.tab[i][k]);
-			put_pixel(e->mlx, e->win, &e->o.tab[i][k]);
+			e->o.T.x = (e->origin.x + k * e->scale);
+			e->o.T.y = (e->origin.y + i * e->scale);
+			color_p(&e->o.T, e);
 		}
 		k = -1;
 	}

@@ -12,7 +12,7 @@ void	bresenham(t_point a, t_point b, t_env *e)
 	br.e2 = 0;
 	while (1)
 	{
-		put_pixel(e->mlx, e->win, &a);
+		put_pixel(&a, e);
 		if (a.x == b.x && a.y == b.y)
 			break ;
 		br.e2 = br.err;
