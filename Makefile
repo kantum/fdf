@@ -10,14 +10,14 @@ DIR = srcs
 
 LIB = lib
 
-SRCS = main.c bresenham.c parser.c show.c hook.c iso.c count_field.c	\
-	   get_height.c
+SRCS = main.c bresenham.c parser.c hook.c draw.c init.c rota.c move.c	\
+	   toggle.c
 
 SRC = $(addprefix $(DIR)/,$(SRCS))
 
 OBJ = $(SRCS:.c=.o)
 
-HEADERS = includes
+HEADERS = includes -I libft/includes
 
 all: $(NAME)
 
