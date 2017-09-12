@@ -21,7 +21,15 @@ void	put_pixel(t_point *p, t_env *e)
 
 void	color_p(t_point *p, t_env *e)
 {
-	p->color = e->color;
+	(void)e;
+	if (p->z < 0)
+		p->color = BLUE;
+	else if (p->z < 10)
+		p->color = GREEN;
+	else if (p->z < 100)
+		p->color = YELLOW;
+	else if (p->z < 1000)
+		p->color = BROWN;
 }
 
 void	trace(t_point **tab, t_env *e)

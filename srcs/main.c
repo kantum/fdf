@@ -22,6 +22,7 @@ int		main(int argc, char **argv)
 		e = *parser(argv[1], &e);
 	if (init(&e) < 0)
 		return (-1);
+	mlx_hook(e.win, 17, (1L << 17), quit, &e);
 	mlx_key_hook(e.win, key_hook, &e);
 	mlx_mouse_hook(e.win, mouse_hook, &e);
 	mlx_expose_hook(e.win, expose_hook, &e);

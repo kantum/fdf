@@ -53,6 +53,8 @@ static void	*scan_input(t_obj *o)
 	o->buf = ft_strnew(0);
 	while ((ret = read(o->fd, rd, BUFF_SIZE)))
 	{
+		if (ret < 0)
+			exit(-1);
 		rd[ret] = '\0';
 		f_ptr = o->buf;
 		if (!(o->buf = ft_strjoin(o->buf, rd)) || ret < 0)
@@ -96,11 +98,13 @@ static void	*fill_tab(t_obj *o)
 
 t_env		*parser(char *arg, t_env *e)
 {
-	e->o.fd = open(arg, O_RDONLY);
+	if (!(e->o.fd = open(arg, O_RDONLY)))
+		exit(-1);
 	if (!scan_input(&e->o))
-		return (NULL);
-	e->o.fd = open(arg, O_RDONLY);
+		exit(-1);
+	if (!(e->o.fd = open(arg, O_RDONLY)))
+		exit(-1);
 	if (!fill_tab(&e->o))
-		return (NULL);
+		exit(-1);
 	return (e);
 }

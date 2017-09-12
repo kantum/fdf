@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void	quit(t_env *e)
+int		quit(t_env *e)
 {
 	mlx_destroy_window(e->mlx, e->win);
 	exit(0);
@@ -33,7 +33,7 @@ int		key_hook(int keycode, t_env *e)
 	else if (keycode == 27 || keycode == 24)
 		zoom(keycode, e);
 	else if (keycode == 15)
-		rota(e, 1, 90);
+		iso(e);
 	else if (keycode == 38 || keycode == 40)
 		pitchit(keycode, e);
 	return (0);
@@ -41,8 +41,26 @@ int		key_hook(int keycode, t_env *e)
 
 int		mouse_hook(int button, int x, int y, t_env *e)
 {
-	(void)e;
-	printf("mouse %d \t [%d] [%d]", button, x, y);
+	static int	toggle = 0;
+	static int	color[5] = {WHITE, YELLOW, BLUE, PINK, GREEN};
+	static int	i = 0;
+
+	(void)x;
+	(void)y;
+	(void)button;
+	if (toggle)
+	{
+		e->color = color[0];
+		toggle = 0;
+	}
+	else if (i < 5 && !toggle)
+	{
+		e->color = color[++i];
+		if (i == 4)
+			i = 0;
+		toggle = 1;
+	}
+	expose_hook(e);
 	return (0);
 }
 
@@ -51,8 +69,13 @@ int		expose_hook(t_env *e)
 	(void)e;
 	init_img(e);
 	set(e);
-	iso(e);
-	draw(e->o.t2, e);
+	if (e->o.iso)
+	{
+		iso(e);
+		draw(e->o.t2, e);
+	}
+	else
+		draw(e->o.tab, e);
 	return (0);
 }
 

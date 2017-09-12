@@ -50,9 +50,18 @@ int		zoom(int keycode, t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);
 	if (keycode == 24)
+	{
 		e->scale += 1;
+		e->origin.y -= 10;
+		e->origin.x -= 10;
+	}
 	else if (keycode == 27)
+	{
 		e->scale -= 1;
+		e->origin.y += 10;
+		e->origin.x += 10;
+	}
+	set(e);
 	if (e->o.iso)
 	{
 		iso(e);
