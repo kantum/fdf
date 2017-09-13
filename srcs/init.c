@@ -22,7 +22,6 @@ void	init_point(t_point *p)
 
 void	init_img(t_env *e)
 {
-	free(e->img);
 	e->img = mlx_new_image(e->mlx, e->win_width, e->win_height);
 	e->data = (int *)mlx_get_data_addr(e->img, &e->bpp, &e->size, &e->endian);
 }

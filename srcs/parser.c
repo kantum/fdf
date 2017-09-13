@@ -12,16 +12,6 @@
 
 #include "fdf.h"
 
-static void	check_length(t_obj *o)
-{
-	static int	l = 0;
-
-	if (!l)
-		l = o->width;
-	else if (l != o->width)
-		exit(-1);
-}
-
 int			count_field(char const *s, char c)
 {
 	int	i;
@@ -44,6 +34,17 @@ int			count_field(char const *s, char c)
 	return (field);
 }
 
+static void	check_length(t_obj *o)
+{
+	static int	l = 0;
+
+	o->width = count_field(o->buf, ' ');
+	if (!l)
+		l = o->width;
+	else if (l != o->width)
+		exit(-1);
+}
+
 static void	*scan_input(t_obj *o)
 {
 	int		ret;
@@ -63,6 +64,7 @@ static void	*scan_input(t_obj *o)
 	}
 	o->width = count_field(o->buf, ' ');
 	o->height = ft_getnline(o->buf);
+	free(o->buf);
 	close(o->fd);
 	return (o);
 }
@@ -79,7 +81,6 @@ static void	*fill_tab(t_obj *o)
 		return (NULL);
 	while (get_next_line(o->fd, &o->buf))
 	{
-		o->width = count_field(o->buf, ' ');
 		check_length(o);
 		o->tab[++i] = (t_point*)malloc((sizeof(t_point) * o->width));
 		tmp = ft_strsplit(o->buf, ' ');
