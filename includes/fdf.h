@@ -86,6 +86,7 @@ struct					s_bres
 	int		e2;
 };
 
+void					free_tab(char **tab);
 void					set(t_env *e);
 void					iso(t_env *e);
 int						quit(t_env *e);
@@ -98,7 +99,7 @@ int						expose_hook(t_env *e);
 int						zoom(int keycode, t_env *e);
 void					move(int keycode, t_env *e);
 t_env					*parser(char *arg, t_env *e);
-void					color_p(t_point *p, t_env *e);
+void					color_p(t_point *p);
 void					draw(t_point **tab, t_env *e);
 void					pitchit(int keycode, t_env *e);
 void					trace(t_point **tab, t_env *e);

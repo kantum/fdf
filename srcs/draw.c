@@ -19,9 +19,8 @@ void	put_pixel(t_point *p, t_env *e)
 		e->data[p->y * e->win_width + p->x] = p->color;
 }
 
-void	color_p(t_point *p, t_env *e)
+void	color_p(t_point *p)
 {
-	(void)e;
 	if (p->z < 0)
 		p->color = BLUE;
 	else if (p->z < 10)
@@ -76,7 +75,7 @@ void	draw(t_point **tab, t_env *e)
 	{
 		while (++k < e->o.width)
 		{
-			color_p(&T, e);
+			color_p(&T);
 			put_pixel(&T, e);
 		}
 		k = -1;
@@ -97,7 +96,7 @@ void	set(t_env *e)
 		{
 			e->o.T.x = (e->origin.x + k * e->scale);
 			e->o.T.y = (e->origin.y + i * e->scale);
-			color_p(&e->o.T, e);
+			color_p(&e->o.T);
 		}
 		k = -1;
 	}

@@ -91,7 +91,8 @@ static void	*fill_tab(t_obj *o)
 			o->tab[i][k].z = ft_atoi(tmp[k]);
 		}
 		k = -1;
-		free(tmp);
+		free(o->buf);
+		free_tab(tmp);
 	}
 	close(o->fd);
 	return (o);
