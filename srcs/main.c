@@ -16,7 +16,7 @@ int		main(int argc, char **argv)
 {
 	t_env		e;
 
-	if (argc < 2 || argc > 3)
+	if (argc < 2 || argc > 2)
 		return (-1);
 	if (argc == 2)
 		e = *parser(argv[1], &e);

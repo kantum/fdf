@@ -108,5 +108,7 @@ t_env		*parser(char *arg, t_env *e)
 		exit(-1);
 	if (!fill_tab(&e->o))
 		exit(-1);
+	if (e->o.width < 1 || e->o.height < 1)
+		exit(-1);
 	return (e);
 }
