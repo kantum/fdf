@@ -76,4 +76,11 @@ void	tg_alt(t_env *e)
 		e->alt = 1;
 		toggle = 1;
 	}
+	if (e->o.iso)
+	{
+		iso(e);
+		draw(e->o.t2, e);
+	}
+	else
+		draw(e->o.tab, e);
 }
