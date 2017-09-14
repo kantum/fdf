@@ -34,6 +34,8 @@ int		key_hook(int keycode, t_env *e)
 		zoom(keycode, e);
 	else if (keycode == 15)
 		iso(e);
+	else if (keycode == 7)
+		tg_alt(e);
 	else if (keycode == 38 || keycode == 40)
 		pitchit(keycode, e);
 	return (0);
@@ -66,7 +68,6 @@ int		mouse_hook(int button, int x, int y, t_env *e)
 
 int		expose_hook(t_env *e)
 {
-	(void)e;
 	init_img(e);
 	set(e);
 	if (e->o.iso)

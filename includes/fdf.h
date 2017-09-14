@@ -64,7 +64,7 @@ typedef struct			s_env
 	int			scale;
 	t_point		origin;
 	t_obj		o;
-	int			axe;
+	int			alt;
 
 	void		*img;
 	int			*data;
@@ -86,20 +86,21 @@ struct					s_bres
 	int		e2;
 };
 
-void					free_tab(char **tab);
 void					set(t_env *e);
 void					iso(t_env *e);
 int						quit(t_env *e);
 int						init(t_env *e);
+void					tg_alt(t_env *e);
 void					tg_rota(t_env *e);
 void					tg_trace(t_env *e);
 void					init_img(t_env *e);
 t_point					**tab_dup(t_obj *o);
+void					free_tab(char **tab);
 int						expose_hook(t_env *e);
 int						zoom(int keycode, t_env *e);
 void					move(int keycode, t_env *e);
 t_env					*parser(char *arg, t_env *e);
-void					color_p(t_point *p);
+void					color_p(t_point *p, t_env *e);
 void					draw(t_point **tab, t_env *e);
 void					pitchit(int keycode, t_env *e);
 void					trace(t_point **tab, t_env *e);

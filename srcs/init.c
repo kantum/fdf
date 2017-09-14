@@ -49,7 +49,7 @@ int		init(t_env *e)
 	e->o.pitch = 1;
 	e->o.bres = 1;
 	e->o.iso = 1;
-	e->axe = 0;
+	e->alt = 0;
 	e->color = 0xFFFFFF;
 	return (0);
 }

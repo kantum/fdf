@@ -19,16 +19,21 @@ void	put_pixel(t_point *p, t_env *e)
 		e->data[p->y * e->win_width + p->x] = p->color;
 }
 
-void	color_p(t_point *p)
+void	color_p(t_point *p, t_env *e)
 {
-	if (p->z < 0)
-		p->color = BLUE;
-	else if (p->z < 10)
-		p->color = GREEN;
-	else if (p->z < 100)
-		p->color = YELLOW;
-	else if (p->z < 1000)
-		p->color = BROWN;
+	if (!e->alt)
+		p->color = e->color;
+	else
+	{
+		if (p->z < 0)
+			p->color = BLUE;
+		else if (p->z < 10)
+			p->color = GREEN;
+		else if (p->z < 100)
+			p->color = YELLOW;
+		else if (p->z < 1000)
+			p->color = BROWN;
+	}
 }
 
 void	trace(t_point **tab, t_env *e)
@@ -75,7 +80,7 @@ void	draw(t_point **tab, t_env *e)
 	{
 		while (++k < e->o.width)
 		{
-			color_p(&T);
+			color_p(&T, e);
 			put_pixel(&T, e);
 		}
 		k = -1;
@@ -96,7 +101,7 @@ void	set(t_env *e)
 		{
 			e->o.T.x = (e->origin.x + k * e->scale);
 			e->o.T.y = (e->origin.y + i * e->scale);
-			color_p(&e->o.T);
+			color_p(&e->o.T, e);
 		}
 		k = -1;
 	}

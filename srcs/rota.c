@@ -61,3 +61,19 @@ void	iso(t_env *e)
 	}
 	e->o.iso = 1;
 }
+
+void	tg_alt(t_env *e)
+{
+	static int	toggle = 0;
+
+	if (toggle)
+	{
+		e->alt = 0;
+		toggle = 0;
+	}
+	else
+	{
+		e->alt = 1;
+		toggle = 1;
+	}
+}

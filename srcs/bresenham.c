@@ -24,7 +24,7 @@ void	bresenham(t_point a, t_point b, t_env *e)
 	br.e2 = 0;
 	while (1)
 	{
-		color_p(&a);
+		color_p(&a, e);
 		put_pixel(&a, e);
 		if (a.x == b.x && a.y == b.y)
 			break ;
