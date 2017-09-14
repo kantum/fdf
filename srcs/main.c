@@ -18,6 +18,9 @@ int		main(int argc, char **argv)
 
 	if (argc < 2 || argc > 2)
 		return (-1);
+	if (!ft_strcmp(argv[1], "/dev/random") ||
+		!ft_strcmp(argv[1], "/dev/urandom"))
+		return (-1);
 	if (argc == 2)
 		e = *parser(argv[1], &e);
 	if (init(&e) < 0)
